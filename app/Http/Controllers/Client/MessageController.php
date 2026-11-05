@@ -11,6 +11,11 @@ use Illuminate\View\View;
 
 class MessageController extends Controller
 {
+    public function create(): View
+    {
+        return view('client.messages.create');
+    }
+
     public function index(Request $request): View
     {
         $client = Client::query()->firstOrCreate([
@@ -22,6 +27,18 @@ class MessageController extends Controller
             ->paginate(10);
 
         return view('client.messages.index', compact('messages'));
+    }
+
+    public function show(Request $request, int $message): View
+    {
+        $client = Client::query()->firstOrCreate([
+            'user_id' => $request->user()->getKey(),
+        ]);
+        $message = $client->messages()
+            ->with('reponses.admin.user')
+            ->findOrFail($message);
+
+        return view('client.messages.show', compact('message'));
     }
 
     public function store(Request $request): RedirectResponse
