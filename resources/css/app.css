@@ -3,3 +3,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.auth-input {
+    @apply block w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm text-stone-900 shadow-sm transition placeholder:text-stone-400;
+}
+
+.auth-input:focus {
+    @apply border-[#db4566] bg-white ring-[#db4566];
+}
+
+.auth-label {
+    @apply block text-sm font-semibold text-stone-700;
+}
+
+.auth-submit-button {
+    @apply inline-flex w-full items-center justify-center rounded-xl border border-transparent bg-[#db4566] px-5 py-3 text-sm font-semibold tracking-wide text-white shadow-md shadow-rose-200/60 transition duration-200 hover:bg-[#c43759] focus:outline-none focus:ring-2 focus:ring-[#db4566] focus:ring-offset-2 active:bg-[#b92f50];
+}
+
+.auth-text-link {
+    @apply font-semibold text-[#c43759] underline decoration-rose-200 underline-offset-4 transition hover:text-[#a72d4b] hover:decoration-[#db4566];
+}

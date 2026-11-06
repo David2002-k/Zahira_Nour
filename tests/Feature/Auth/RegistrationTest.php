@@ -18,7 +18,12 @@ class RegistrationTest extends TestCase
             ->assertOk()
             ->assertSee('name="prenom"', false)
             ->assertSee('name="nom"', false)
-            ->assertSee('name="telephone"', false);
+            ->assertSee('name="telephone"', false)
+            ->assertSee('Créer un compte')
+            ->assertSee('Prénom')
+            ->assertSee('Nom')
+            ->assertSee('Mot de passe')
+            ->assertSee('Créer mon compte');
     }
 
     public function test_new_users_can_register(): void
@@ -44,5 +49,17 @@ class RegistrationTest extends TestCase
             'user_id' => $user->getKey(),
         ]);
         $response->assertRedirect(route('dashboard', absolute: false));
+    }
+
+    public function test_registration_validation_messages_are_in_french(): void
+    {
+        $response = $this->from('/register')->post('/register', []);
+
+        $response->assertSessionHasErrors([
+            'nom' => 'Le champ nom est obligatoire.',
+            'prenom' => 'Le champ prénom est obligatoire.',
+            'email' => 'Le champ adresse e-mail est obligatoire.',
+            'password' => 'Le champ mot de passe est obligatoire.',
+        ]);
     }
 }

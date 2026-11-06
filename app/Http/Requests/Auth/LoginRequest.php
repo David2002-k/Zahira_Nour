@@ -34,6 +34,22 @@ class LoginRequest extends FormRequest
     }
 
     /**
+     * Get the validation messages for the request.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Veuillez saisir votre adresse e-mail.',
+            'email.string' => 'L’adresse e-mail doit être une chaîne de caractères.',
+            'email.email' => 'Veuillez saisir une adresse e-mail valide.',
+            'password.required' => 'Veuillez saisir votre mot de passe.',
+            'password.string' => 'Le mot de passe doit être une chaîne de caractères.',
+        ];
+    }
+
+    /**
      * Attempt to authenticate the request's credentials.
      *
      * @throws ValidationException
@@ -46,7 +62,7 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => 'L’adresse e-mail ou le mot de passe est incorrect.',
             ]);
         }
 
@@ -67,12 +83,10 @@ class LoginRequest extends FormRequest
         event(new Lockout($this));
 
         $seconds = RateLimiter::availableIn($this->throttleKey());
+        $unit = $seconds === 1 ? 'seconde' : 'secondes';
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
+            'email' => "Trop de tentatives. Veuillez réessayer dans {$seconds} {$unit}.",
         ]);
     }
 

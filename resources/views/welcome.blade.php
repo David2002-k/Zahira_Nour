@@ -19,121 +19,91 @@
   <div class="hero_area" id="accueil">
     <!-- header section strats -->
     <header class="header_section">
-      <nav class="navbar navbar-expand-lg custom_nav-container" aria-label="Navigation principale">
-        <a class="navbar-brand" href="{{ url('/') }}#accueil">
-          <span>
-            Zahira Nour
+      <nav class="navbar navbar-expand-lg custom_nav-container home-nav" aria-label="Navigation principale">
+        <a class="navbar-brand home-brand" href="{{ url('/') }}#accueil">
+          <span class="brand-name">
+            <span class="brand-name-red">Zahira</span>
+            <span class="brand-name-black">Nour</span>
           </span>
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Ouvrir ou fermer le menu">
-          <span class=""></span>
+        <button class="navbar-toggler home-nav-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Ouvrir ou fermer le menu">
+          <span></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#accueil" aria-current="page">Accueil <span class="sr-only">(page actuelle)</span></a>
+        <div class="collapse navbar-collapse home-nav-menu" id="navbarSupportedContent">
+          <ul class="navbar-nav home-nav-links">
+            <li class="nav-item">
+              <a class="nav-link" href="#accueil" aria-current="page">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#boutique">
-                Boutique
-              </a>
+              <a class="nav-link" href="#boutique">Boutique</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ asset('front-end/why.html') }}">
-                Pourquoi nous
-              </a>
+              <a class="nav-link" href="{{ asset('front-end/why.html') }}">Pourquoi nous</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ asset('front-end/testimonial.html') }}">
-                Témoignages
-              </a>
+              <a class="nav-link" href="{{ asset('front-end/testimonial.html') }}">Témoignages</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#contact">Contactez-nous</a>
             </li>
           </ul>
-          <div class="user_option">
+          <div class="user_option home-user-options">
             @if (Auth::check())
               @if (Auth::user()->role === 'admin')
-                <a href="{{ route('admin.dashboard') }}">
-                  <i class="fa fa-user" aria-hidden="true"></i>
-                  <span>Tableau de bord</span>
-                </a>
+                <a class="home-account-link" href="{{ route('admin.dashboard') }}">Mon tableau de bord</a>
               @else
-                <a href="{{ route('client.dashboard') }}">
-                  <i class="fa fa-user" aria-hidden="true"></i>
-                  <span>Mon espace</span>
-                </a>
+                <a class="home-account-link" href="{{ route('client.dashboard') }}">Mon espace</a>
               @endif
             @else
-              <a href="{{ route('login') }}">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <span>Se connecter</span>
-              </a>
-              <a href="{{ route('register') }}">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <span>S’inscrire</span>
-              </a>
+              <a class="home-login-link" href="{{ route('login') }}">Se connecter</a>
+              <a class="home-register-link" href="{{ route('register') }}">Créer un compte</a>
             @endif
           </div>
         </div>
       </nav>
     </header>
 
-    <!-- end header section -->
-    <!-- slider section -->
-
-    <section class="slider_section">
-      <div class="slider_container">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-md-7">
-                    <div class="detail-box">
-                      <h1>
-                        Bienvenue chez <br>
-                        Zahira Nour
-                      </h1>
-                      <p>
-                        Trouvez une attention délicate pour faire plaisir à ceux qui comptent.
-                      </p>
-                      <a href="#boutique">
-                        Découvrir la boutique
-                      </a>
-                    </div>
-                  </div>
-                  <div class="col-md-5 ">
-                    <div class="img-box">
-                      <img src="{{ asset('front-end/images/image3.jpeg') }}" alt="Sélection de produits de la boutique Zahira Nour" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
+    <section class="home-hero" aria-labelledby="home-hero-title">
+      <div class="home-hero-copy">
+        <p class="home-eyebrow"><span aria-hidden="true">✦</span> Le plaisir d’offrir</p>
+        <h1 id="home-hero-title">
+          Les petites attentions<br>
+          <span>font les grands bonheurs.</span>
+        </h1>
+        <p class="home-hero-description">
+          Des cadeaux choisis avec soin pour célébrer les personnes qui comptent, dans chaque moment de la vie.
+        </p>
+        <div class="home-hero-actions">
+          <a class="home-button home-button-primary" href="#boutique">Découvrir la boutique <span aria-hidden="true">→</span></a>
+          <a class="home-button home-button-secondary" href="#contact">Nous contacter</a>
+        </div>
+        <div class="home-hero-note">
+          <span class="home-note-icon" aria-hidden="true">♡</span>
+          <span>Une sélection pensée pour faire plaisir</span>
+        </div>
+      </div>
+      <div class="home-hero-visual">
+        <div class="home-hero-image-wrap">
+          <img src="{{ asset('front-end/images/image3.jpeg') }}" alt="Une sélection de cadeaux et d’accessoires Zahira Nour">
+        </div>
+        <div class="home-visual-stamp" aria-hidden="true">
+          <span>Choisi</span>
+          <span>avec amour</span>
+          <span class="home-stamp-heart">♡</span>
         </div>
       </div>
     </section>
-
-    <!-- end slider section -->
   </div>
-  <!-- end hero area -->
 
-  <!-- boutique section -->
-
-  <section class="shop_section layout_padding" id="boutique">
+  <section class="shop_section layout_padding home-products" id="boutique">
     <div class="container">
       <div class="heading_container heading_center">
-        <h2>
-          Nos produits
-        </h2>
+        <p class="home-section-eyebrow">Une attention pour chaque occasion</p>
+        <h2>Nos coups de cœur</h2>
+        <p class="home-section-description">Découvrez des idées cadeaux qui feront sourire ceux que vous aimez.</p>
       </div>
-      <div class="row">
+      <div class="row home-products-grid">
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="box">
             <a href="{{ route('client.boutique.index') }}">
@@ -343,20 +313,12 @@
     </div>
   </section>
 
-  <!-- Boutique section -->
-
-
-
-
-
-
-
-  <!-- contact section -->
-
-  <section class="contact_section" id="contact">
-    <div class="container px-0">
-      <div class="heading_container ">
-        <h2>Contactez-nous</h2>
+  <section class="contact_section home-contact" id="contact">
+    <div class="container">
+      <div class="heading_container">
+        <p class="home-section-eyebrow">Nous sommes à votre écoute</p>
+        <h2>Parlons de votre prochaine attention</h2>
+        <p class="home-section-description">Une question ou besoin d’un conseil ? Écrivez-nous, nous serons ravis de vous aider.</p>
       </div>
     </div>
     <div class="container container-bg">
@@ -453,20 +415,14 @@
         </div>
       </div>
     </div>
-    <!-- pied de page -->
-    <footer class=" footer_section">
+    <footer class="footer_section home-footer">
       <div class="container">
-        <p>
-          &copy; <span id="displayYear"></span> Tous droits réservés par
-          <a href="https://html.design/">Web Tech Knowledge</a>
-        </p>
+        <a class="home-footer-brand" href="{{ url('/') }}#accueil"><span>Zahira</span> Nour</a>
+        <p>&copy; <span id="displayYear">{{ date('Y') }}</span> Zahira Nour. Tous droits réservés.</p>
       </div>
     </footer>
-    <!-- pied de page -->
 
   </section>
-
-  <!-- end info section -->
 
 
   <script src="{{ asset('front-end/js/jquery-3.4.1.min.js') }}"></script>

@@ -16,6 +16,10 @@
         flex-direction: row;
     }
 
+    .custom_nav-container .navbar-brand {
+        align-self: center;
+    }
+
     .custom_nav-container .navbar-nav {
         align-items: center;
     }

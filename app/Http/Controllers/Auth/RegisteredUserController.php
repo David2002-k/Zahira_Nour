@@ -31,21 +31,37 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        $validated = $request->validate([
             'nom' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
             'telephone' => ['nullable', 'string', 'max:20'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'required' => 'Le champ :attribute est obligatoire.',
+            'string' => 'Le champ :attribute doit être une chaîne de caractères.',
+            'max.string' => 'Le champ :attribute ne peut pas dépasser :max caractères.',
+            'lowercase.email' => 'L’adresse e-mail doit être saisie en minuscules.',
+            'email.email' => 'Veuillez saisir une adresse e-mail valide.',
+            'unique.email' => 'Cette adresse e-mail est déjà utilisée.',
+            'confirmed' => 'La confirmation du mot de passe ne correspond pas.',
+            'min.string' => 'Le champ :attribute doit contenir au moins :min caractères.',
+            'password.uncompromised' => 'Ce mot de passe a déjà été compromis. Veuillez en choisir un autre.',
+        ], [
+            'nom' => 'nom',
+            'prenom' => 'prénom',
+            'telephone' => 'téléphone',
+            'email' => 'adresse e-mail',
+            'password' => 'mot de passe',
         ]);
 
-        $user = DB::transaction(function () use ($request): User {
+        $user = DB::transaction(function () use ($validated): User {
             $user = User::create([
-                'nom' => $request->nom,
-                'prenom' => $request->prenom,
-                'telephone' => $request->telephone,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
+                'nom' => $validated['nom'],
+                'prenom' => $validated['prenom'],
+                'telephone' => $validated['telephone'] ?? null,
+                'email' => $validated['email'],
+                'password' => Hash::make($validated['password']),
             ]);
 
             $user->client()->create();
