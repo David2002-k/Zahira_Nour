@@ -14,6 +14,9 @@ class DashboardController extends Controller
 {
     public function index(): View
     {
+        $produitsTotals = Produit::query()
+            ->Where('stock', 0)
+            ->count();
         $commandesEnAttente = Commande::query()
             ->where('statut', 'en_attente')
             ->count();
@@ -28,7 +31,7 @@ class DashboardController extends Controller
             ->where('statut', 'en_attente')
             ->count();
         $montantPaye = Paiement::query()
-            ->where('statut', 'confirme')
+            ->where('statut', 'en_attente')
             ->sum('montant_paye');
         $dernieresCommandes = Commande::query()
             ->with('client.user')
@@ -37,6 +40,7 @@ class DashboardController extends Controller
             ->get();
 
         return view('admin.dashboard', compact(
+            'produitsTotals',
             'commandesEnAttente',
             'produitsEnRupture',
             'messagesNonLus',
