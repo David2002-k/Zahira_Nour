@@ -34,11 +34,11 @@ Routes Public
 Route::get('/', function () {
     return view('welcome');
 });
-
+/*
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
+*/
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -59,6 +59,12 @@ Route::middleware(['auth', 'role:admin'])
         // Gestion des catégories
         Route::get('/categories', [CategorieController::class, 'index'])
             ->name('categories.index');
+
+        Route::get('/categories/creer', [CategorieController::class, 'create'])
+            ->name('categories.create');
+
+        Route::get('/categories/{categorie}/edit', [CategorieController::class, 'edit'])
+            ->name('categories.edit');
 
         Route::post('/categories', [CategorieController::class, 'store'])
             ->name('categories.store');

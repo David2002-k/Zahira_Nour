@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mb-8">
-        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#c43759]">Votre espace personnel</p>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-stone-700">Votre espace personnel</p>
         <h1 class="mt-2 font-serif text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">Heureuse de vous retrouver</h1>
         <p class="mt-3 text-sm leading-6 text-stone-500">Connectez-vous pour accéder à votre compte et à vos commandes.</p>
     </div>
@@ -20,7 +20,7 @@
             <div class="flex items-center justify-between gap-3">
                 <x-input-label for="password" value="Mot de passe" class="auth-label" />
                 @if (Route::has('password.request'))
-                    <a class="text-sm font-semibold text-[#c43759] transition hover:text-[#a72d4b]" href="{{ route('password.request') }}">
+                    <a class="text-sm font-semibold text-stone-700 transition hover:text-stone-950" href="{{ route('password.request') }}">
                         Mot de passe oublié ?
                     </a>
                 @endif
@@ -31,7 +31,7 @@
 
         <div class="flex items-center">
             <label for="remember_me" class="inline-flex cursor-pointer items-center gap-2 text-sm text-stone-600">
-                <input id="remember_me" type="checkbox" class="h-4 w-4 rounded border-stone-300 accent-[#db4566] focus:ring-[#db4566]" name="remember">
+                <input id="remember_me" type="checkbox" class="h-4 w-4 rounded border-stone-300 accent-stone-900 focus:ring-stone-900" name="remember">
                 <span>Se souvenir de moi</span>
             </label>
         </div>

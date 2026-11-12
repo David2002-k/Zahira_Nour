@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mb-8">
-        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#c43759]">Rejoignez-nous</p>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-stone-700">Rejoignez-nous</p>
         <h1 class="mt-2 font-serif text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">Créer un compte</h1>
         <p class="mt-3 text-sm leading-6 text-stone-500">Inscrivez-vous pour retrouver vos commandes et découvrir nos nouveautés.</p>
     </div>

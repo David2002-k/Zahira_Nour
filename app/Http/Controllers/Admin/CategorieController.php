@@ -24,6 +24,16 @@ class CategorieController extends Controller
         return view('admin.categories.index', compact('categories'));
     }
 
+    public function create(): View
+    {
+        return view('admin.categories.create');
+    }
+
+    public function edit(Categorie $categorie): View
+    {
+        return view('admin.categories.edit', compact('categorie'));
+    }
+
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([

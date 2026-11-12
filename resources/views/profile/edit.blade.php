@@ -3,7 +3,12 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Profile') }}
         </h2>
+
+        <div class="container py-3 btn btn-outline-dark btn-sm-sm">
+            <a class="brand-mark navbar-brand" href="{{ route('admin.dashboard') }}"><span>Retour au Tableau de bord</span></a>
+        </div>
     </x-slot>
+    
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">

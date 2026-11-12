@@ -56,3 +56,14 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Développement avec Docker
+
+L'application est construite dans l'image Docker pour éviter les lectures lentes depuis le dossier Windows partagé. Les sources modifiées sont synchronisées dans le conteneur avec Docker Compose Watch.
+
+```bash
+docker compose up -d --build
+docker compose watch
+```
+
+Laissez `docker compose watch` actif pendant le développement. Après une modification CSS ou JavaScript, lancez `npm run build` sur l'hôte ; les fichiers compilés seront synchronisés dans le conteneur.

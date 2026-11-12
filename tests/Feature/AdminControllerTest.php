@@ -16,7 +16,7 @@ class AdminControllerTest extends TestCase
 
         $response = $this->actingAs($admin)->get(route('admin.dashboard'));
 
-        $response->assertOk()->assertViewIs('dashboard');
+        $response->assertOk()->assertViewIs('admin.dashboard');
     }
 
     public function test_client_cannot_view_the_admin_dashboard(): void

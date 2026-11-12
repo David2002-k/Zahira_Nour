@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="Découvrez la sélection de cadeaux et d’accessoires Zahira Nour." />
   <link rel="shortcut icon" href="{{ asset('front-end/images/favicon.png') }}" type="image/x-icon">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
   <title>Zahira Nour | Boutique</title>
 
@@ -13,6 +15,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('front-end/css/bootstrap.css') }}" />
   <link href="{{ asset('front-end/css/style.css') }}" rel="stylesheet" />
   <link href="{{ asset('front-end/css/responsive.css') }}" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -21,9 +24,9 @@
     <header class="header_section">
       <nav class="navbar navbar-expand-lg custom_nav-container home-nav" aria-label="Navigation principale">
         <a class="navbar-brand home-brand" href="{{ url('/') }}#accueil">
+          <img class="home-brand-logo" src="{{ asset('front-end/images/zahira-nour-logo.jpeg') }}" alt="">
           <span class="brand-name">
-            <span class="brand-name-red">Zahira</span>
-            <span class="brand-name-black">Nour</span>
+            Zahira Nour
           </span>
         </a>
         <button class="navbar-toggler home-nav-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Ouvrir ou fermer le menu">
@@ -39,10 +42,10 @@
               <a class="nav-link" href="#boutique">Boutique</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ asset('front-end/why.html') }}">Pourquoi nous</a>
+              <a class="nav-link" href="#pourquoi_nous">Pourquoi nous</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ asset('front-end/testimonial.html') }}">Témoignages</a>
+              <a class="nav-link" href="#temoignage">Témoignages</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#contact">Contactez-nous</a>
@@ -417,7 +420,10 @@
     </div>
     <footer class="footer_section home-footer">
       <div class="container">
-        <a class="home-footer-brand" href="{{ url('/') }}#accueil"><span>Zahira</span> Nour</a>
+        <a class="home-footer-brand" href="{{ url('/') }}#accueil">
+          <img src="{{ asset('front-end/images/zahira-nour-logo.jpeg') }}" alt="">
+          <span>Zahira Nour</span>
+        </a>
         <p>&copy; <span id="displayYear">{{ date('Y') }}</span> Zahira Nour. Tous droits réservés.</p>
       </div>
     </footer>
@@ -425,11 +431,11 @@
   </section>
 
 
-  <script src="{{ asset('front-end/js/jquery-3.4.1.min.js') }}"></script>
-  <script src="{{ asset('front-end/js/bootstrap.js') }}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  <script src="{{ asset('front-end/js/jquery-3.4.1.min.js') }}" defer></script>
+  <script src="{{ asset('front-end/js/bootstrap.js') }}" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" defer>
   </script>
-  <script src="{{ asset('front-end/js/custom.js') }}"></script>
+  <script src="{{ asset('front-end/js/custom.js') }}" defer></script>
 
 </body>
 
