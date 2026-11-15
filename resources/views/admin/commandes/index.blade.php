@@ -6,10 +6,13 @@
     <title>Commandes - Zahira Nour</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="Dashboard-shell">
+<body class="Dashboard-shell admin-dashboard">
     <nav class="dashboard-nav navbar navbar-expand-lg">
         <div class="container py-3">
-            <a class="brand-mark navbar-brand" href="{{ route('admin.dashboard') }}">Zahira Nour</a>
+            <a class="brand-mark navbar-brand" href="{{ route('admin.dashboard') }}" aria-label="Tableau de bord Zahira Nour">
+                <img class="dashboard-brand-logo" src="{{ asset('front-end/images/zahira-nour-logo.jpeg') }}" alt="">
+                <span class="brand-name">Zahira Nour</span>
+            </a>
             <div class="d-flex align-items-center gap-3 ms-auto">
                 <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-dark btn-sm">Retour au tableau de bord</a>
             </div>

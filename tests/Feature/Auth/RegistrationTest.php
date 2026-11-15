@@ -48,7 +48,7 @@ class RegistrationTest extends TestCase
         $this->assertDatabaseHas('clients', [
             'user_id' => $user->getKey(),
         ]);
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $response->assertRedirect(route('client.dashboard', absolute: false));
     }
 
     public function test_registration_validation_messages_are_in_french(): void

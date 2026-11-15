@@ -67,6 +67,16 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
+
+        $user = Auth::user();
+
+        if ($user && $user->role === 'client' && $user->statut === 'bloque') {
+            Auth::guard('web')->logout();
+
+            throw ValidationException::withMessages([
+                'email' => 'Votre compte client est bloqué. Veuillez contacter l’administration.',
+            ]);
+        }
     }
 
     /**

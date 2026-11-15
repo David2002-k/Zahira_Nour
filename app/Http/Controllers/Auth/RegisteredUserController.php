@@ -56,13 +56,15 @@ class RegisteredUserController extends Controller
         ]);
 
         $user = DB::transaction(function () use ($validated): User {
-            $user = User::create([
+            $user = new User([
                 'nom' => $validated['nom'],
                 'prenom' => $validated['prenom'],
                 'telephone' => $validated['telephone'] ?? null,
                 'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),
             ]);
+            $user->role = 'client';
+            $user->save();
 
             $user->client()->create();
 
@@ -73,6 +75,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->to(route($user->dashboardRouteName(), absolute: false));
     }
 }

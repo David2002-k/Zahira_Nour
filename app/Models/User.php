@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use LogicException;
 
 #[Fillable(['nom', 'prenom', 'telephone', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -28,11 +29,20 @@ class User extends Authenticatable
         return $this->hasOne(Client::class);
     }
 
-/**
- * Obtenir les attributs qui doivent être convertis (castés).
- *
- * @return array<string, string>
- */
+    public function dashboardRouteName(): string
+    {
+        return match ($this->role) {
+            'admin' => 'admin.dashboard',
+            'client' => 'client.dashboard',
+            default => throw new LogicException('A valid user role is required to choose a dashboard route.'),
+        };
+    }
+
+    /**
+     * Obtenir les attributs qui doivent être convertis (castés).
+     *
+     * @return array<string, string>
+     */
     protected function casts(): array
     {
         return [

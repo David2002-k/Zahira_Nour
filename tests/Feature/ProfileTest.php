@@ -18,7 +18,26 @@ class ProfileTest extends TestCase
             ->actingAs($user)
             ->get('/profile');
 
-        $response->assertOk();
+        $response
+            ->assertOk()
+            ->assertSee(route('client.dashboard'))
+            ->assertSee('Retour au tableau de bord');
+    }
+
+    public function test_admin_profile_sections_are_displayed_in_french(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $response = $this->actingAs($admin)->get('/profile');
+
+        $response
+            ->assertOk()
+            ->assertSee('Informations du profil')
+            ->assertSee('Modifier le mot de passe')
+            ->assertSee('Supprimer le compte')
+            ->assertDontSee('Profile Information')
+            ->assertDontSee('Update Password')
+            ->assertDontSee('Delete Account');
     }
 
     public function test_profile_information_can_be_updated(): void

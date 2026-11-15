@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Admin\CategorieController;
 use App\Http\Controllers\Admin\ProduitController;
 use App\Http\Controllers\Admin\CommandeController as AdminCommandeController;
@@ -55,6 +56,13 @@ Route::middleware(['auth', 'role:admin'])
         // Dashboard
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])
             ->name('dashboard');
+
+        // Gestion des comptes clients
+        Route::get('/clients', [AdminClientController::class, 'index'])
+            ->name('clients.index');
+
+        Route::patch('/clients/{user}/statut', [AdminClientController::class, 'updateStatus'])
+            ->name('clients.update-status');
 
         // Gestion des catégories
         Route::get('/categories', [CategorieController::class, 'index'])
