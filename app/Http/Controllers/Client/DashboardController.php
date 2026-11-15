@@ -21,7 +21,15 @@ class DashboardController extends Controller
         $commandesEnCours = $client->commandes()
             ->whereIn('statut', ['en_attente', 'confirmee', 'en_preparation', 'expediee'])
             ->count();
+        $totalCommandes = $client->commandes()->count();
+        $messagesEnvoyes = $client->messages()->count();
 
-        return view('client.dashboard', compact('client', 'commandesRecentes', 'commandesEnCours'));
+        return view('client.dashboard', compact(
+            'client',
+            'commandesRecentes',
+            'commandesEnCours',
+            'totalCommandes',
+            'messagesEnvoyes',
+        ));
     }
 }
