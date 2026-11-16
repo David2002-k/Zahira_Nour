@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Client;
 
+use App\Models\Admin;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -31,12 +32,19 @@ class DashboardControllerTest extends TestCase
             'telephone_livraison' => '0102030405',
             'date_commande' => now(),
         ]);
-        $client->messages()->create([
+        $message = $client->messages()->create([
             'prenom' => $user->prenom ?? '',
             'nom' => $user->nom,
             'email' => $user->email,
             'sujet' => 'Question sur une commande',
             'contenu' => 'Bonjour, où en est ma commande ?',
+        ]);
+        $admin = Admin::query()->create([
+            'user_id' => User::factory()->create(['role' => 'admin'])->getKey(),
+        ]);
+        $message->reponses()->create([
+            'admin_id' => $admin->getKey(),
+            'contenu' => 'Votre commande est en préparation.',
         ]);
 
         $response = $this->actingAs($user)->get(route('client.dashboard'));
@@ -46,9 +54,11 @@ class DashboardControllerTest extends TestCase
             ->assertViewHas('commandesEnCours', 1)
             ->assertViewHas('totalCommandes', 2)
             ->assertViewHas('messagesEnvoyes', 1)
+            ->assertViewHas('messagesAvecReponse', 1)
             ->assertSee('Commandes en cours')
             ->assertSee('Commandes au total')
             ->assertSee('Messages envoyés')
+            ->assertSee('Messages avec réponse')
             ->assertSee('CMD-CLIENT-002')
             ->assertSee('CMD-CLIENT-001')
             ->assertSee('5 000,00 FCFA')
@@ -67,6 +77,7 @@ class DashboardControllerTest extends TestCase
             ->assertViewHas('commandesEnCours', 0)
             ->assertViewHas('totalCommandes', 0)
             ->assertViewHas('messagesEnvoyes', 0)
+            ->assertViewHas('messagesAvecReponse', 0)
             ->assertSee('Vous n’avez pas encore passé de commande.')
             ->assertSee(route('client.boutique.index'));
     }

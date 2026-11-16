@@ -22,7 +22,7 @@ class MessageController extends Controller
             'user_id' => $request->user()->getKey(),
         ]);
         $messages = $client->messages()
-            ->with('reponses.admin.user')
+            ->withCount('reponses')
             ->latest()
             ->paginate(10);
 
@@ -62,5 +62,20 @@ class MessageController extends Controller
 
         return to_route('client.messages.index')
             ->with('success', 'Votre message a été envoyé.');
+    }
+
+    public function destroy(Request $request, Message $message): RedirectResponse
+    {
+        $client = Client::query()->firstOrCreate([
+            'user_id' => $request->user()->getKey(),
+        ]);
+        $message = $client->messages()
+            ->whereKey($message->getKey())
+            ->firstOrFail();
+
+        $message->delete();
+
+        return to_route('client.messages.index')
+            ->with('success', 'Votre message a été supprimé.');
     }
 }

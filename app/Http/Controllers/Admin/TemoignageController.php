@@ -35,4 +35,12 @@ class TemoignageController extends Controller
         return to_route('admin.temoignages.index')
             ->with('success', 'Statut du témoignage mis à jour.');
     }
+
+    public function destroy(Temoignage $temoignage): RedirectResponse
+    {
+        $temoignage->delete();
+
+        return to_route('admin.temoignages.index')
+            ->with('success', 'Le témoignage a été supprimé.');
+    }
 }

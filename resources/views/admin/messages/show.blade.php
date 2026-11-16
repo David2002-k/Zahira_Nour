@@ -23,6 +23,13 @@
         @if (session('success'))
             <div class="alert alert-success mb-4">{{ session('success') }}</div>
         @endif
+        <div class="d-flex justify-content-end mb-4">
+            <form method="POST" action="{{ route('admin.messages.destroy', $message) }}" onsubmit="return confirm('Voulez-vous supprimer ce message et ses réponses ?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-outline-danger">Supprimer ce message</button>
+            </form>
+        </div>
 
         <div class="row g-4">
             <div class="col-lg-8">

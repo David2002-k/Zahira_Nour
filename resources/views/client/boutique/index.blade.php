@@ -69,7 +69,7 @@
 
                                 <div class="card-body d-flex flex-column">
                                     <p class="small text-uppercase text-secondary mb-2">{{ $produit->categorie?->nom ?? 'Sélection Zahira Nour' }}</p>
-                                    <h2 class="h5">{{ $produit->nom }}</h2>
+                                    <h2 class="h5"><a href="{{ route('client.boutique.show', $produit) }}" class="link-dark text-decoration-none">{{ $produit->nom }}</a></h2>
                                     <p class="text-secondary flex-grow-1">
                                         {{ \Illuminate\Support\Str::limit($produit->description ?: 'Découvrez ce produit de notre sélection.', 110) }}
                                     </p>

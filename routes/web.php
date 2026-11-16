@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Public\BoutiqueController as PublicBoutiqueController;
+use App\Http\Controllers\Public\ContactController;
+use App\Http\Controllers\Public\TemoignageController as PublicTemoignageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +38,14 @@ Routes Public
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/boutique', [PublicBoutiqueController::class, 'index'])->name('public.boutique');
+Route::get('/contact', [ContactController::class, 'create'])->name('public.contact');
+Route::post('/contact', [ContactController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('public.contact.store');
+Route::view('/pourquoi-nous', 'pourquoi_nous')->name('public.pourquoi-nous');
+Route::get('/temoignages', [PublicTemoignageController::class, 'index'])->name('public.temoignages');
 /*
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -119,6 +130,9 @@ Route::middleware(['auth', 'role:admin'])
         Route::post('/messages/{message}/reponse', [AdminMessageController::class, 'reply'])
             ->name('messages.reply');
 
+        Route::delete('/messages/{message}', [AdminMessageController::class, 'destroy'])
+            ->name('messages.destroy');
+
         // Gestion des paiements
         Route::get('/paiements', [AdminPaiementController::class, 'index'])
             ->name('paiements.index');
@@ -135,6 +149,9 @@ Route::middleware(['auth', 'role:admin'])
 
         Route::put('/temoignages/{temoignage}', [AdminTemoignageController::class, 'update'])
             ->name('temoignages.update');
+
+        Route::delete('/temoignages/{temoignage}', [AdminTemoignageController::class, 'destroy'])
+            ->name('temoignages.destroy');
 
         // Gestion des réseaux sociaux
         Route::get('/reseaux-sociaux', [ReseauSocialController::class, 'index'])
@@ -208,6 +225,9 @@ Route::middleware(['auth', 'role:client'])
 
         Route::get('/messages/{message}', [ClientMessageController::class, 'show'])
             ->name('messages.show');
+
+        Route::delete('/messages/{message}', [ClientMessageController::class, 'destroy'])
+            ->name('messages.destroy');
 
         // Témoignages
         Route::get('/temoignages', [ClientTemoignageController::class, 'index'])

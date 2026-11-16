@@ -20,7 +20,7 @@
 
 <body>
   <div class="hero_area" id="accueil">
-    <!-- header section strats -->
+
     <header class="header_section">
       <nav class="navbar navbar-expand-lg custom_nav-container home-nav" aria-label="Navigation principale">
         <a class="navbar-brand home-brand" href="{{ url('/') }}#accueil">
@@ -36,19 +36,19 @@
         <div class="collapse navbar-collapse home-nav-menu" id="navbarSupportedContent">
           <ul class="navbar-nav home-nav-links">
             <li class="nav-item">
-              <a class="nav-link" href="#accueil" aria-current="page">Accueil</a>
+              <a class="nav-link" href="{{ url('/') }}" aria-current="page">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#boutique">Boutique</a>
+              <a class="nav-link" href="{{ route('public.boutique') }}">Boutique</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#pourquoi_nous">Pourquoi nous</a>
+              <a class="nav-link" href="{{ route('public.pourquoi-nous') }}">Pourquoi nous</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#temoignage">Témoignages</a>
+              <a class="nav-link" href="{{ route('public.temoignages') }}">Témoignages</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#contact">Contactez-nous</a>
+              <a class="nav-link" href="{{ route('public.contact') }}">Contactez-nous</a>
             </li>
           </ul>
           <div class="user_option home-user-options">
@@ -79,7 +79,7 @@
         </p>
         <div class="home-hero-actions">
           <a class="home-button home-button-primary" href="#boutique">Découvrir la boutique <span aria-hidden="true">→</span></a>
-          <a class="home-button home-button-secondary" href="#contact">Nous contacter</a>
+          <a class="home-button home-button-secondary" href="{{ route('public.contact') }}">Nous contacter</a>
         </div>
         <div class="home-hero-note">
           <span class="home-note-icon" aria-hidden="true">♡</span>
@@ -109,7 +109,7 @@
       <div class="row home-products-grid">
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="box">
-            <a href="{{ route('client.boutique.index') }}">
+            <a href="{{ route('public.boutique') }}">
               <div class="img-box">
                 <img src="{{ asset('front-end/images/p1.png') }}" alt="Bague" loading="lazy">
               </div>
@@ -134,7 +134,7 @@
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="box">
-            <a href="{{ route('client.boutique.index') }}">
+            <a href="{{ route('public.boutique') }}">
               <div class="img-box">
                 <img src="{{ asset('front-end/images/p2.png') }}" alt="Montre" loading="lazy">
               </div>
@@ -159,7 +159,7 @@
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="box">
-            <a href="{{ route('client.boutique.index') }}">
+            <a href="{{ route('public.boutique') }}">
               <div class="img-box">
                 <img src="{{ asset('front-end/images/p3.png') }}" alt="Peluche" loading="lazy">
               </div>
@@ -184,7 +184,7 @@
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="box">
-            <a href="{{ route('client.boutique.index') }}">
+            <a href="{{ route('public.boutique') }}">
               <div class="img-box">
                 <img src="{{ asset('front-end/images/p4.png') }}" alt="Bouquet de fleurs" loading="lazy">
               </div>
@@ -209,7 +209,7 @@
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="box">
-            <a href="{{ route('client.boutique.index') }}">
+            <a href="{{ route('public.boutique') }}">
               <div class="img-box">
                 <img src="{{ asset('front-end/images/p5.png') }}" alt="Peluche" loading="lazy">
               </div>
@@ -234,7 +234,7 @@
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="box">
-            <a href="{{ route('client.boutique.index') }}">
+            <a href="{{ route('public.boutique') }}">
               <div class="img-box">
                 <img src="{{ asset('front-end/images/p6.png') }}" alt="Bouquet de fleurs" loading="lazy">
               </div>
@@ -259,7 +259,7 @@
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="box">
-            <a href="{{ route('client.boutique.index') }}">
+            <a href="{{ route('public.boutique') }}">
               <div class="img-box">
                 <img src="{{ asset('front-end/images/p7.png') }}" alt="Montre" loading="lazy">
               </div>
@@ -284,7 +284,7 @@
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="box">
-            <a href="{{ route('client.boutique.index') }}">
+            <a href="{{ route('public.boutique') }}">
               <div class="img-box">
                 <img src="{{ asset('front-end/images/p8.png') }}" alt="Bague" loading="lazy">
               </div>
@@ -309,7 +309,7 @@
         </div>
       </div>
       <div class="btn-box">
-        <a href="{{ route('client.boutique.index') }}">
+        <a href="{{ route('public.boutique') }}">
           Voir tous les produits
         </a>
       </div>
@@ -342,21 +342,30 @@
           </div>
         </div>
         <div class="col-md-6 col-lg-5 px-0">
-          <form action="#">
+          @if (session('success'))
+            <div class="alert alert-success" role="status">{{ session('success') }}</div>
+          @endif
+          <form action="{{ route('public.contact.store') }}" method="POST">
+            @csrf
             <div>
-              <input type="text" placeholder="Prénom" aria-label="Prénom" />
+              <input type="text" name="prenom" value="{{ old('prenom') }}" placeholder="Prénom" aria-label="Prénom" required />
+              @error('prenom') <small class="text-danger">{{ $message }}</small> @enderror
             </div>
             <div>
-              <input type="text" placeholder="Nom" aria-label="Nom" />
+              <input type="text" name="nom" value="{{ old('nom') }}" placeholder="Nom" aria-label="Nom" required />
+              @error('nom') <small class="text-danger">{{ $message }}</small> @enderror
             </div>
             <div>
-              <input type="email" placeholder="Adresse e-mail" aria-label="Adresse e-mail" />
+              <input type="email" name="email" value="{{ old('email') }}" placeholder="Adresse e-mail" aria-label="Adresse e-mail" required />
+              @error('email') <small class="text-danger">{{ $message }}</small> @enderror
             </div>
             <div>
-              <input type="text" placeholder="Sujet" aria-label="Sujet" />
+              <input type="text" name="sujet" value="{{ old('sujet') }}" placeholder="Sujet" aria-label="Sujet" required />
+              @error('sujet') <small class="text-danger">{{ $message }}</small> @enderror
             </div>
             <div>
-              <textarea class="message-box" placeholder="Votre message" aria-label="Votre message" rows="4"></textarea>
+              <textarea class="message-box" name="contenu" placeholder="Votre message" aria-label="Votre message" rows="4" required>{{ old('contenu') }}</textarea>
+              @error('contenu') <small class="text-danger">{{ $message }}</small> @enderror
             </div>
             <div class="d-flex ">
               <button type="submit">
@@ -372,6 +381,22 @@
   <!-- info section -->
 
   <section class="info_section  layout_padding2-top">
+    <div class="social_container">
+      <div class="social_box">
+        <a href="">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+        </a>
+        <a href="">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+        </a>
+        <a href="">
+          <i class="fa fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="">
+          <i class="fa fa-youtube" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
     <div class="info_container ">
       <div class="container">
         <div class="row">
@@ -409,7 +434,7 @@
               CONTACTEZ-NOUS
             </h6>
             <div class="info_link-box">
-              <a href="#contact">
+              <a href="{{ route('public.contact') }}">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>Accéder au formulaire de contact</span>
               </a>

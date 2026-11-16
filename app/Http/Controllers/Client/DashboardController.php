@@ -23,6 +23,9 @@ class DashboardController extends Controller
             ->count();
         $totalCommandes = $client->commandes()->count();
         $messagesEnvoyes = $client->messages()->count();
+        $messagesAvecReponse = $client->messages()
+            ->whereHas('reponses')
+            ->count();
 
         return view('client.dashboard', compact(
             'client',
@@ -30,6 +33,7 @@ class DashboardController extends Controller
             'commandesEnCours',
             'totalCommandes',
             'messagesEnvoyes',
+            'messagesAvecReponse',
         ));
     }
 }

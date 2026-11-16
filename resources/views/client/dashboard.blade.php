@@ -37,7 +37,7 @@
         </section>
 
         <section class="dashboard-summary row g-3 mb-5" aria-label="Résumé de votre activité">
-            <div class="col-12 col-sm-6 col-lg-4">
+            <div class="col-12 col-sm-6 col-lg-3">
                 <article class="card h-100 shadow-sm">
                     <div class="card-body">
                         <p class="text-secondary small text-uppercase fw-semibold mb-2">Commandes en cours</p>
@@ -46,7 +46,7 @@
                     </div>
                 </article>
             </div>
-            <div class="col-12 col-sm-6 col-lg-4">
+            <div class="col-12 col-sm-6 col-lg-3">
                 <article class="card h-100 shadow-sm">
                     <div class="card-body">
                         <p class="text-secondary small text-uppercase fw-semibold mb-2">Commandes au total</p>
@@ -55,12 +55,21 @@
                     </div>
                 </article>
             </div>
-            <div class="col-12 col-sm-6 col-lg-4">
+            <div class="col-12 col-sm-6 col-lg-3">
                 <article class="card h-100 shadow-sm">
                     <div class="card-body">
                         <p class="text-secondary small text-uppercase fw-semibold mb-2">Messages envoyés</p>
                         <p class="display-6 fw-semibold mb-1">{{ $messagesEnvoyes }}</p>
                         <a href="{{ route('client.messages.index') }}" class="small">Accéder à mes messages</a>
+                    </div>
+                </article>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <article class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <p class="text-secondary small text-uppercase fw-semibold mb-2">Messages avec réponse</p>
+                        <p class="display-6 fw-semibold mb-1">{{ $messagesAvecReponse }}</p>
+                        <a href="{{ route('client.messages.index') }}" class="small">Voir les réponses reçues</a>
                     </div>
                 </article>
             </div>

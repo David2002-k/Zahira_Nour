@@ -48,18 +48,25 @@
                                 <p class="mb-0 small text-muted">{{ $temoignage->date_publication?->format('d/m/Y H:i') ?? 'Non publié' }}</p>
                             </div>
 
-                            <form method="POST" action="{{ route('admin.temoignages.update', $temoignage) }}" class="d-flex align-items-center gap-2 flex-wrap">
-                                @csrf
-                                @method('PUT')
-                                <select name="statut" class="form-select form-select-sm">
-                                    @foreach (['en_attente', 'approuve', 'rejete'] as $statut)
-                                        <option value="{{ $statut }}" @selected($temoignage->statut === $statut)>
-                                            {{ str_replace('_', ' ', $statut) }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <button type="submit" class="btn btn-outline-dark btn-sm">Valider</button>
-                            </form>
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <form method="POST" action="{{ route('admin.temoignages.update', $temoignage) }}" class="d-flex align-items-center gap-2 flex-wrap">
+                                    @csrf
+                                    @method('PUT')
+                                    <select name="statut" class="form-select form-select-sm">
+                                        @foreach (['en_attente', 'approuve', 'rejete'] as $statut)
+                                            <option value="{{ $statut }}" @selected($temoignage->statut === $statut)>
+                                                {{ str_replace('_', ' ', $statut) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <button type="submit" class="btn btn-outline-dark btn-sm">Valider</button>
+                                </form>
+                                <form method="POST" action="{{ route('admin.temoignages.destroy', $temoignage) }}" onsubmit="return confirm('Voulez-vous supprimer ce témoignage ?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Supprimer</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @empty

@@ -48,7 +48,14 @@
                                 <p class="mb-1 text-muted">{{ $message->email }}</p>
                                 <p class="mb-0 text-muted">{{ Str::limit($message->contenu, 120) }}</p>
                             </div>
-                            <a href="{{ route('admin.messages.show', $message) }}" class="btn btn-dark btn-sm align-self-start">Voir</a>
+                            <div class="d-flex flex-column gap-2 align-self-start">
+                                <a href="{{ route('admin.messages.show', $message) }}" class="btn btn-dark btn-sm">Voir</a>
+                                <form method="POST" action="{{ route('admin.messages.destroy', $message) }}" onsubmit="return confirm('Voulez-vous supprimer ce message et ses réponses ?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">Supprimer</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @empty

@@ -59,4 +59,12 @@ class MessageController extends Controller
         return to_route('admin.messages.show', $message)
             ->with('success', 'Réponse envoyée.');
     }
+
+    public function destroy(Message $message): RedirectResponse
+    {
+        $message->delete();
+
+        return to_route('admin.messages.index')
+            ->with('success', 'Le message a été supprimé.');
+    }
 }
