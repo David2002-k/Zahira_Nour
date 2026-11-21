@@ -48,7 +48,7 @@ body {
 }
 
 .heading_container h2 span {
-  color: #f89cab;
+  color: #171717;
 }
 
 .heading_container.heading_center {
@@ -69,7 +69,7 @@ body {
 
 #navbarSupportedContent {
   width: 100%;
-  background-color: skyblue;
+  background-color: #f7f7f7;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -810,7 +810,7 @@ a:focus {
   outline: none;
   border: none;
   color: #ffffff;
-  background: #f89cab;
+  background: #171717;
   margin-top: 15px;
   text-transform: uppercase;
 }

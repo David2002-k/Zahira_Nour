@@ -9,10 +9,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-light">
+<body class="public-layout bg-light">
     <header class="border-bottom bg-white">
         <nav class="container d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 py-3" aria-label="Navigation principale">
-            <a class="navbar-brand mb-0 fw-semibold text-dark text-decoration-none" href="{{ url('/') }}">Zahira Nour</a>
+            <a class="public-brand navbar-brand mb-0 fw-semibold text-dark text-decoration-none" href="{{ url('/') }}">
+                <img src="{{ asset('front-end/images/zahira-nour-logo.jpeg') }}" alt="" class="public-brand-logo">
+                <span>Zahira Nour</span>
+            </a>
 
             <div class="d-flex flex-wrap gap-3">
                 <a class="link-dark text-decoration-none" href="{{ url('/') }}">Accueil</a>

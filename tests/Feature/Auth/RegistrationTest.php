@@ -32,6 +32,7 @@ class RegistrationTest extends TestCase
             'prenom' => 'Jane',
             'nom' => 'Test User',
             'telephone' => '0612345678',
+            'telephone_country' => 'FR',
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
@@ -41,7 +42,7 @@ class RegistrationTest extends TestCase
         $this->assertDatabaseHas('users', [
             'prenom' => 'Jane',
             'nom' => 'Test User',
-            'telephone' => '0612345678',
+            'telephone' => '+33612345678',
             'email' => 'test@example.com',
         ]);
         $user = User::query()->where('email', 'test@example.com')->firstOrFail();

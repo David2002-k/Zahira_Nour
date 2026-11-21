@@ -9,7 +9,10 @@
 <body class="client-dashboard">
     <nav class="dashboard-nav navbar navbar-expand-lg">
         <div class="container py-3">
-            <a class="brand-mark navbar-brand fw-semibold" href="{{ route('client.dashboard') }}">Zahira Nour</a>
+            <a class="brand-mark navbar-brand fw-semibold" href="{{ route('client.dashboard') }}">
+                <img class="dashboard-brand-logo" src="{{ asset('front-end/images/zahira-nour-logo.jpeg') }}" alt="">
+                <span class="brand-name">Zahira Nour</span>
+            </a>
             <div class="d-flex align-items-center gap-2 gap-sm-3 ms-auto">
                 <a href="{{ route('client.panier.index') }}" class="btn btn-outline-dark btn-sm">Mon panier</a>
                 <a href="{{ route('client.dashboard') }}" class="btn btn-outline-dark btn-sm">Mon espace</a>
@@ -22,14 +25,14 @@
     </nav>
 
     <main class="container py-5">
-        <section class="mb-5" aria-labelledby="catalog-title">
-            <p class="text-uppercase small fw-semibold text-secondary mb-2">Zahira Nour</p>
+        <section class="client-catalog-header mb-5" aria-labelledby="catalog-title">
+            <p class="catalog-eyebrow mb-2">Zahira Nour</p>
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3">
                 <div>
                     <h1 id="catalog-title" class="display-5 fw-semibold mb-2">La boutique</h1>
                     <p class="lead text-secondary mb-0">Découvrez notre sélection et trouvez le cadeau idéal.</p>
                 </div>
-                <p class="text-secondary mb-0">
+                <p class="catalog-count mb-1">
                     {{ $produits->total() }} {{ $produits->total() === 1 ? 'produit disponible' : 'produits disponibles' }}
                 </p>
             </div>

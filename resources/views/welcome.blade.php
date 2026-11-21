@@ -78,7 +78,7 @@
           Des cadeaux choisis avec soin pour célébrer les personnes qui comptent, dans chaque moment de la vie.
         </p>
         <div class="home-hero-actions">
-          <a class="home-button home-button-primary" href="#boutique">Découvrir la boutique <span aria-hidden="true">→</span></a>
+          <a class="home-button home-button-primary" href="{{ route('public.boutique') }}">Découvrir la boutique <span aria-hidden="true">→</span></a>
           <a class="home-button home-button-secondary" href="{{ route('public.contact') }}">Nous contacter</a>
         </div>
         <div class="home-hero-note">
@@ -382,19 +382,17 @@
 
   <section class="info_section  layout_padding2-top">
     <div class="social_container">
-      <div class="social_box">
-        <a href="">
-          <i class="fa fa-facebook" aria-hidden="true"></i>
-        </a>
-        <a href="">
-          <i class="fa fa-twitter" aria-hidden="true"></i>
-        </a>
-        <a href="">
-          <i class="fa fa-instagram" aria-hidden="true"></i>
-        </a>
-        <a href="">
-          <i class="fa fa-youtube" aria-hidden="true"></i>
-        </a>
+      <div>
+        <h2 class="home-section-eyebrow">Nos réseaux sociaux</h2>
+        <div class="social_box">
+          @forelse ($reseauxSociaux as $reseau)
+            <a href="{{ $reseau->url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $reseau->nom }}" title="{{ $reseau->nom }}">
+              <i class="fa fa-{{ $reseau->icone ?: 'share-alt' }}" aria-hidden="true"></i>
+            </a>
+          @empty
+            <span>Réseaux sociaux bientôt disponibles.</span>
+          @endforelse
+        </div>
       </div>
     </div>
     <div class="info_container ">

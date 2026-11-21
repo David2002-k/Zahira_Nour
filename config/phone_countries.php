@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'BF' => ['name' => 'Burkina Faso', 'dial_code' => '+226', 'min_digits' => 8, 'max_digits' => 8],
+    'BJ' => ['name' => 'Bénin', 'dial_code' => '+229', 'min_digits' => 8, 'max_digits' => 10],
+    'CA' => ['name' => 'Canada', 'dial_code' => '+1', 'min_digits' => 10, 'max_digits' => 10],
+    'CM' => ['name' => 'Cameroun', 'dial_code' => '+237', 'min_digits' => 8, 'max_digits' => 9],
+    'CI' => ['name' => 'Côte d’Ivoire', 'dial_code' => '+225', 'min_digits' => 10, 'max_digits' => 10],
+    'CD' => ['name' => 'République démocratique du Congo', 'dial_code' => '+243', 'national_prefix' => '0', 'min_digits' => 7, 'max_digits' => 10],
+    'FR' => ['name' => 'France', 'dial_code' => '+33', 'national_prefix' => '0', 'min_digits' => 9, 'max_digits' => 9],
+    'DE' => ['name' => 'Allemagne', 'dial_code' => '+49', 'national_prefix' => '0', 'min_digits' => 5, 'max_digits' => 13],
+    'GH' => ['name' => 'Ghana', 'dial_code' => '+233', 'national_prefix' => '0', 'min_digits' => 9, 'max_digits' => 9],
+    'GN' => ['name' => 'Guinée', 'dial_code' => '+224', 'min_digits' => 8, 'max_digits' => 9],
+    'IT' => ['name' => 'Italie', 'dial_code' => '+39', 'min_digits' => 6, 'max_digits' => 12],
+    'ML' => ['name' => 'Mali', 'dial_code' => '+223', 'min_digits' => 8, 'max_digits' => 8],
+    'MA' => ['name' => 'Maroc', 'dial_code' => '+212', 'national_prefix' => '0', 'min_digits' => 9, 'max_digits' => 9],
+    'NE' => ['name' => 'Niger', 'dial_code' => '+227', 'min_digits' => 8, 'max_digits' => 8],
+    'NG' => ['name' => 'Nigeria', 'dial_code' => '+234', 'national_prefix' => '0', 'min_digits' => 10, 'max_digits' => 10],
+    'SN' => ['name' => 'Sénégal', 'dial_code' => '+221', 'min_digits' => 9, 'max_digits' => 9],
+    'ES' => ['name' => 'Espagne', 'dial_code' => '+34', 'min_digits' => 9, 'max_digits' => 9],
+    'CH' => ['name' => 'Suisse', 'dial_code' => '+41', 'national_prefix' => '0', 'min_digits' => 9, 'max_digits' => 9],
+    'TG' => ['name' => 'Togo', 'dial_code' => '+228', 'min_digits' => 8, 'max_digits' => 8],
+    'TN' => ['name' => 'Tunisie', 'dial_code' => '+216', 'min_digits' => 8, 'max_digits' => 8],
+    'AE' => ['name' => 'Émirats arabes unis', 'dial_code' => '+971', 'national_prefix' => '0', 'min_digits' => 8, 'max_digits' => 9],
+    'GB' => ['name' => 'Royaume-Uni', 'dial_code' => '+44', 'national_prefix' => '0', 'min_digits' => 7, 'max_digits' => 10],
+    'US' => ['name' => 'États-Unis', 'dial_code' => '+1', 'min_digits' => 10, 'max_digits' => 10],
+];

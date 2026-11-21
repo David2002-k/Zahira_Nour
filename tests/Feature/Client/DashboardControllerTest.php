@@ -81,4 +81,15 @@ class DashboardControllerTest extends TestCase
             ->assertSee('Vous n’avez pas encore passé de commande.')
             ->assertSee(route('client.boutique.index'));
     }
+
+    public function test_dashboard_keeps_quick_actions_inside_the_hidden_container(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('client.dashboard'));
+
+        $response->assertOk()
+            ->assertSee('<div x-show="open" x-transition id="clientQuickActions" class="mt-3">', false)
+            ->assertSee('<div class="d-flex flex-column gap-2">', false);
+    }
 }

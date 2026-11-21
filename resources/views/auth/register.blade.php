@@ -5,6 +5,10 @@
         <p class="mt-3 text-sm leading-6 text-stone-500">Inscrivez-vous pour retrouver vos commandes et découvrir nos nouveautés.</p>
     </div>
 
+    @php
+        $selectedPhoneCountry = $phoneCountries[old('telephone_country', 'BF')] ?? $phoneCountries['BF'];
+    @endphp
+
     <form method="POST" action="{{ route('register') }}" class="space-y-5">
         @csrf
 
@@ -24,8 +28,27 @@
 
         <div>
             <x-input-label for="telephone" value="Téléphone (facultatif)" class="auth-label" />
-            <x-text-input id="telephone" class="auth-input mt-2" type="tel" name="telephone" :value="old('telephone')" maxlength="20" autocomplete="tel" />
-            <x-input-error :messages="$errors->get('telephone')" class="mt-2 text-sm text-rose-600" />
+            <div class="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+                <div>
+                    <x-input-label for="telephone_country" value="Pays / indicatif" class="auth-label" />
+                    <select id="telephone_country" name="telephone_country" class="auth-input mt-2">
+                        @foreach ($phoneCountries as $code => $country)
+                            <option
+                                value="{{ $code }}"
+                                data-national-prefix="{{ $country['national_prefix'] ?? '' }}"
+                                data-min-digits="{{ $country['min_digits'] }}"
+                                data-max-digits="{{ $country['max_digits'] }}"
+                                @selected(old('telephone_country', 'BF') === $code)
+                            >{{ $country['name'] }} ({{ $country['dial_code'] }})</option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('telephone_country')" class="mt-2 text-sm text-rose-600" />
+                </div>
+                <div>
+                    <x-text-input id="telephone" class="auth-input mt-2 sm:mt-8" type="tel" name="telephone" :value="old('telephone')" inputmode="numeric" minlength="{{ $selectedPhoneCountry['min_digits'] + strlen($selectedPhoneCountry['national_prefix'] ?? '') }}" maxlength="{{ $selectedPhoneCountry['max_digits'] + strlen($selectedPhoneCountry['national_prefix'] ?? '') }}" autocomplete="tel-national" aria-describedby="telephone-errors" />
+                    <x-input-error id="telephone-errors" :messages="$errors->get('telephone')" class="mt-2 text-sm text-rose-600" />
+                </div>
+            </div>
         </div>
 
         <div>
@@ -55,4 +78,23 @@
             <a class="auth-text-link" href="{{ route('login') }}">Se connecter</a>
         </div>
     </form>
+
+    <script>
+        const phoneCountry = document.getElementById('telephone_country');
+        const phoneInput = document.getElementById('telephone');
+        function updatePhoneLength() {
+            const option = phoneCountry.selectedOptions[0];
+            const minDigits = Number(option.dataset.minDigits);
+            const maxDigits = Number(option.dataset.maxDigits);
+            const nationalPrefixLength = option.dataset.nationalPrefix.length;
+            const inputMinDigits = minDigits + nationalPrefixLength;
+            const inputMaxDigits = maxDigits + nationalPrefixLength;
+
+            phoneInput.minLength = inputMinDigits;
+            phoneInput.maxLength = inputMaxDigits;
+        }
+
+        phoneCountry.addEventListener('change', updatePhoneLength);
+        updatePhoneLength();
+    </script>
 </x-guest-layout>

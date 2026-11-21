@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Public\BoutiqueController as PublicBoutiqueController;
 use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\TemoignageController as PublicTemoignageController;
+use App\Models\ReseauSocial;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +37,9 @@ use App\Http\Controllers\Client\PaiementController as ClientPaiementController;
 Routes Public
 */
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+        'reseauxSociaux' => ReseauSocial::query()->orderBy('nom')->get(),
+    ]);
 });
 
 Route::get('/boutique', [PublicBoutiqueController::class, 'index'])->name('public.boutique');
